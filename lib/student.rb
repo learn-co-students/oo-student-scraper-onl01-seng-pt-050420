@@ -12,15 +12,14 @@ class Student
   end
 
   def self.create_from_collection(students_array)
-    #Scraper.scrape_profile_page(student_hash)
     students_array.each {|student| self.new(student)}
   end
 
   def add_student_attributes(attributes_hash)
-    student = Scraper.scrape_profile_page(attributes_hash)
-    attributes_hash.each do |attribute|
-      self[attribute] = attributes_hash[attribute]
+    attributes_hash.each do |attr, value|
+      self.send("#{attr}=", value)
     end
+    self
   end
 
   def self.all
